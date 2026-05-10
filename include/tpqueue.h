@@ -46,7 +46,6 @@ class TPQueue {
   }
 
   T pop() {
-
     Item *temp = head;
     T value = temp->data;
     head = head->next;
