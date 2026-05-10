@@ -1,14 +1,14 @@
 // Copyright 2022 NNTU-CS
 #ifndef INCLUDE_TPQUEUE_H_
 #define INCLUDE_TPQUEUE_H_
-
 struct SYM {
   char ch;
   int prior;
 };
 
 template<typename T>
-private:
+class TPQueue {
+ private:
   struct Item {
     T data;
     Item *next;
@@ -23,7 +23,7 @@ private:
     return item;
   }
 
-public:
+ public:
   void push(const T &value) {
     Item *item = create(value);
 
@@ -46,9 +46,6 @@ public:
   }
 
   T pop() {
-    if (!head) {
-      throw std::runtime_error("Queue is empty");
-    }
 
     Item *temp = head;
     T value = temp->data;
@@ -56,6 +53,13 @@ public:
     delete temp;
 
     return value;
+  }
+  ~TPQueue() {
+    while (head) {
+      Item *temp = head;
+      head = head->next;
+      delete temp;
+    }
   }
 };
 #endif  // INCLUDE_TPQUEUE_H_
